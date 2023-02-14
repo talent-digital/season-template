@@ -1,0 +1,12 @@
+[build]
+    base = "."
+    publish = "assets/"
+
+[[headers]]
+    for = "/*"
+
+[headers.values]
+    Access-Control-Allow-Origin = "*"
+
+[context.deploy-preview]
+    command = "cp ./season.yaml ./assets/season.yaml"

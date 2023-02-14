@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "node_modules/@talentdigital/season/dist/SeasonDefinition.json": "season.yaml",
+        "https://json.schemastore.org/github-workflow.json": ".github/workflows/deploy.yml"
+    }
+}

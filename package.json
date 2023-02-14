@@ -1,0 +1,9 @@
+{
+  "name": "season-template",
+  "description": "A template for a talent::digital season",
+  "author": "talent::digital",
+  "license": "ISC",
+  "devDependencies": {
+    "@talentdigital/season": "^0.6.0"
+  }
+}

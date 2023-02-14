@@ -1,0 +1,13 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@talentdigital/season': ^0.6.0
+
+devDependencies:
+  '@talentdigital/season': 0.6.0
+
+packages:
+
+  /@talentdigital/season/0.6.0:
+    resolution: {integrity: sha512-6izjdBzgY8t98xz7/64kQhBGxmrfjtDJsznL+840+VG4rOE/X7cb4ywe/Oh+hQFGoqzPlrM0O2TcvhZagqHvmA==}
+    dev: true

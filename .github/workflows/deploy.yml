@@ -1,0 +1,16 @@
+name: Deploy Season
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: talent-digital/deploy-season@v1
+        with:
+          environment_name: ${{ vars.TENANT_ID }}
+          episodes_provisioner_client_password: ${{ secrets.EPISODES_PROVISIONER_CLIENT_PASSWORD }}
+          episodes_provisioner_client: "episodes-provisioner-client"
+          target_domain: "talentdigital.eu"
