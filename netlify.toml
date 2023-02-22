@@ -9,4 +9,4 @@
     Access-Control-Allow-Origin = "*"
 
 [context.deploy-preview]
-    command = "cp ./season.yaml ./assets/season.yaml"
+    command = "cp ./season.yaml ./assets/season.yaml; cp ./index.html ./assets/index.html"
