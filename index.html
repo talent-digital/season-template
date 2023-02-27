@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+
+        font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+
+        color-scheme: light dark;
+        color: rgba(255, 255, 255, 0.87);
+        background-color: #242424;
+
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #list {
+        margin: 50px 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      #title {
+        font-size: 28px;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+
+      #info {
+        margin-top: 0;
+        font-size: 18px;
+      }
+
+      .template {
+        display: none;
+      }
+
+      .list-item {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+      }
+
+      .list-item p {
+        margin: 0;
+      }
+
+      .list-item a {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="list">
+      <p id="title"></p>
+      <p id="info"></p>
+    </div>
+
+    <div class="template">
+      <p class="title"></p>
+      <a>LINK</a>
+    </div>
+
+    <script>
+      const yaml = window.jsyaml;
+      const language =
+        window.navigator.userLanguage || window.navigator.language;
+      const url = window.location.origin;
+
+      const getText = (data) => {
+        if (data[language]) {
+          return data[language];
+        }
+
+        return data["de"];
+      };
+
+      (async function () {
+        try {
+          const data = await fetch(`${url}/season.yaml`);
+          const text = await data.text();
+          const obj = yaml.load(text);
+
+          document.querySelector("#title").innerText = getText(obj.title);
+          document.querySelector("#info").innerText = getText(obj.info);
+
+          const list = document.querySelector("#list");
+
+          for (const key in obj.episodes) {
+            const episode = obj.episodes[key];
+            const node = document.querySelector(".template").cloneNode(true);
+            node.classList.add("list-item");
+            node.classList.remove("template");
+            node.querySelector(".title").innerText = `${key}. ${getText(
+              episode.title
+            )}`;
+            node
+              .querySelector("a")
+              .setAttribute(
+                "href",
+                `https://${episode.format}.netlify.app/app/${episode.format}/?sid=_&eid=${key}&redirectUrl=https://www.google.com&configUrl=${url}`
+              );
+            list.appendChild(node);
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      })();
+    </script>
+  </body>
+</html>
